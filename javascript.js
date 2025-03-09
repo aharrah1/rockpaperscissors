@@ -77,6 +77,4 @@ function playGame(numberOfRounds) {
     }
 }
 
-playGame(5);
-
 
