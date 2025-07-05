@@ -1,80 +1,70 @@
 console.log("Howdy");
 
+const buttons = document.querySelectorAll(".button");
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", (e) => {
+    const computerScoreElement = document.querySelector(".computer-score");
+    const userScoreElement = document.querySelector(".user-score");
+    let currentComputerScore = parseInt(computerScoreElement.textContent);
+    let currentUserScore = parseInt(userScoreElement.textContent);
+
+    if (currentUserScore === 5 || currentComputerScore === 5) {
+      alert("Game is over. Stop clicking that");
+    } else {
+      const computerChoice = getComputerChoice();
+      const humanChoice = e.target.attributes.value.value;
+      console.log(humanChoice);
+      const result = playRound(humanChoice, computerChoice);
+      if (result === "Computer Win") {
+        let newScore = currentComputerScore + 1;
+        if (newScore < 5) {
+          computerScoreElement.textContent = newScore;
+        } else {
+          computerScoreElement.textContent = newScore;
+          alert("You lose! Refresh to try again.");
+        }
+      } else if (result === "User Win") {
+        let newScore = currentUserScore + 1;
+        if (newScore < 5) {
+          userScoreElement.textContent = newScore;
+        } else {
+          userScoreElement.textContent = newScore;
+          alert("You win! Refresh to play again.");
+        }
+      } else {
+        alert("Tie! Try again.");
+      }
+    }
+  });
+}
+
 function getComputerChoice() {
-    const randomNumber = Math.random();
-    if(randomNumber <= .33) {
-        return "Rock"
-    } else if (randomNumber > .33 && randomNumber <= .66) {
-        return "Paper"
-    } else {
-        return "Scissors"
-    }
+  const randomNumber = Math.random();
+  if (randomNumber <= 0.33) {
+    return "rock";
+  } else if (randomNumber > 0.33 && randomNumber <= 0.66) {
+    return "paper";
+  } else {
+    return "scissors";
+  }
 }
 
-function getHumanChoice(promptText) {
-    let userChoice = prompt(promptText);
-    let lowerCaseUserChoice = userChoice.toLowerCase()
-    if (lowerCaseUserChoice === "rock") {
-        return "Rock"
-    } else if (lowerCaseUserChoice === "paper") {
-        return "Paper"
-    } else if (lowerCaseUserChoice === "scissors") {
-        return "Scissors"
-    } else {
-        alert("reload and try again fuckwit")
-    }
+function playRound(userSelection, computerSelection) {
+  if (userSelection === computerSelection) {
+    console.log("Tie!");
+    return "Tie";
+  } else if (userSelection === "rock" && computerSelection === "paper") {
+    console.log("You lose! " + computerSelection + " beats " + userSelection);
+    return "Computer Win";
+  } else if (userSelection === "paper" && computerSelection === "scissors") {
+    console.log("You lose! " + computerSelection + " beats " + userSelection);
+    return "Computer Win";
+  } else if (userSelection === "scissors" && computerSelection === "rock") {
+    console.log("You lose! " + computerSelection + " beats " + userSelection);
+    return "Computer Win";
+  } else {
+    console.log("You win! " + userSelection + " beats " + computerSelection);
+    return "User Win";
+  }
 }
-
-function playRound(userSelection,computerSelection) {
-    if (userSelection === computerSelection) {
-        console.log("Tie!");
-        return "Tie"
-    } else if (userSelection === "Rock" && computerSelection === "Paper") {
-        console.log("You lose! " + computerSelection + " beats " + userSelection);
-        return "Computer Win"
-    } else if (userSelection === "Paper" && computerSelection === "Scissors") {
-        console.log("You lose! " + computerSelection + " beats " + userSelection)
-        return "Computer Win"
-    } else if (userSelection === "Scissors" && computerSelection === "Rock") {
-        console.log("You lose! " + computerSelection + " beats " + userSelection)
-        return "Computer Win"
-    } else {
-        console.log("You win! " + userSelection + " beats " + computerSelection)
-        return "User Win"
-    }
-}
-
-let userScore = 0;
-let computerScore = 0;
-
-function playGame(numberOfRounds) {
-    for (let i = 1; i <= numberOfRounds; i++) {
-        let computerChoice = getComputerChoice();
-        let userChoice = getHumanChoice("Enter Rock, Paper, or Scissors");
-        console.log("User Choice: " +userChoice);
-        let winner = playRound(userChoice, computerChoice);
-        if (winner === "User Win") {
-            userScore++
-        } else if (winner === "Computer Win") {
-            computerScore++
-        } else {
-            numberOfRounds++
-        }
-        if (i === numberOfRounds) {
-            let victoryMessage;
-            if (userScore > computerScore) {
-                victoryMessage = "Congrats foo, you won. Final score: " + userScore + " to " + computerScore
-            } else {
-                victoryMessage = "You lost fucking idiot. Final score: " + userScore + " to " + computerScore
-            }
-            alert(victoryMessage)
-        } else {
-            console.log("Current Score: User - " + userScore + " Computer - " + computerScore);
-            console.log("Current Round: " + i);
-            console.log("Rounds Remaining: " + (numberOfRounds - i))
-        }
-
-    }
-}
-
-

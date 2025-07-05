@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="javascript.js" defer></script>
 </head>
 <body>
-    <script src="javascript.js"></script>
     <header class="header-container">
         <h1>Let's Play Rock, Paper, Scissors</h1>
     </header>
@@ -16,18 +16,30 @@
         <div class="buttons-container">
             <div class="button-container">
                 <div class="overlay"></div>
-                <button class="button" type="button">Rock</button> 
+                <button class="button" type="button" value="rock">Rock</button> 
                 <img class="button-image" src="./images/rocks.jpg" alt="rocks">
             </div>
             <div class="button-container">
                 <div class="overlay"></div>
-                <button class="button" type="button">Paper</button> 
+                <button class="button" type="button" value="paper">Paper</button> 
                 <img class="button-image" src="./images/paper.jpg" alt="rocks">
             </div>
             <div class="button-container">
                 <div class="overlay"></div>
-                <button class="button" type="button">Scissors</button> 
+                <button class="button" type="button" value="scissors">Scissors</button> 
                 <img class="button-image" src="./images/scissors.jpg" alt="rocks">
+            </div>
+        </div>
+        <div class="results-container">
+            <div class="user-results-container">
+                <img class="score-image" src="./images/jonhCena.webp" alt="John Cena">
+                <h2>User Score</h2>
+                <h2 class="user-score">0</h2>
+            </div>
+            <div class="computer-results-container">
+                <img class="score-image" src="./images/karen.webp" alt="Karen">
+                <h2>Computer Score</h2>
+                <h2 class="computer-score">0</h2>
             </div>
         </div>
     </main>
